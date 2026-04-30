@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0a0a0a;
+  --color-bg: oklch(20% 0 0);
   --color-fg: #e5e5e5;
   --color-muted: #888888;
   --color-primary: #e5e5e5;
+  --color-logo: oklch(0.514 0.222 16.935);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
-    monospace;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 :root {
@@ -39,4 +40,13 @@ a:hover {
 ::selection {
   background: var(--color-fg);
   color: var(--color-bg);
+}
+
+.mars-logo path {
+  fill: var(--color-primary);
+  transition: fill 200ms ease;
+}
+
+.mars-logo:hover path {
+  fill: var(--color-logo);
 }
