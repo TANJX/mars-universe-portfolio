@@ -193,5 +193,6 @@ Note: dropping the old site into `public/archive/` lets Vercel serve it as stati
 - Animations
 - Analytics
 - Custom typography (web fonts)
+- Multilingual intro + language switcher (Mars will write the intro in multiple languages and add a switcher; intro layout in Phase 1 should leave room for the switcher to be added without rework)
 
 These all live in later phases.

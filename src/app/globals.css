@@ -50,3 +50,9 @@ a:hover {
 .mars-logo:hover path {
   fill: var(--color-logo);
 }
+
+ruby rt {
+  color: var(--color-muted);
+  font-size: 0.5em;
+  font-weight: 400;
+}
