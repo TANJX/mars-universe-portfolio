@@ -24,14 +24,16 @@ export default function Home() {
             LinkedIn
           </a>
           <a
-            href="https://github.com/marstanjx"
+            href="https://github.com/TANJX"
             target="_blank"
             rel="noreferrer"
           >
             GitHub
           </a>
-          <a href="mailto:mars@instalily.ai">Email</a>
-          <a href="/archive">Archive</a>
+          <a href="mailto:marstanjx@gmail.com">Email</a>
+          <a href="https://archive.marstanjx.com" target="_blank" rel="noreferrer">
+            Archive
+          </a>
         </nav>
       </main>
     </LangProvider>
