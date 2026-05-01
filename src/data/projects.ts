@@ -97,27 +97,13 @@ export const PROJECTS: Project[] = [
     url: "https://youtu.be/izcohuh3vBA",
   },
   {
-    title: {
-      en: "Mars Website",
-      zh: "作品集网站",
-      ja: "作品集サイト",
-    },
-    description: {
-      en: "Earlier version of portfolio website.",
-      zh: "早期版本的作品集网站",
-      ja: "以前の作品集サイト",
-    },
-    year: 2020,
-    url: "https://archive.marstanjx.com/",
-  },
-  {
     title: { en: "AARDVARC", zh: "AARDVARC", ja: "AARDVARC" },
     description: {
       en: "USC syllabus platform, since acquired by Salesforce.",
       zh: "南加大课程大纲平台（Salesforce 收购）",
       ja: "シラバスツール（Salesforce に買収）",
     },
-    year: 2019,
+    year: 2020,
     url: "https://aardvarc.archive.marstanjx.com/",
   },
   {
@@ -143,5 +129,19 @@ export const PROJECTS: Project[] = [
     },
     year: 2018,
     url: "https://notes.marstanjx.com/n3/chapter/1/",
+  },
+  {
+    title: {
+      en: "Portfolio Site",
+      zh: "作品集网站",
+      ja: "作品集サイト",
+    },
+    description: {
+      en: "Earlier projects can be found here.",
+      zh: "早期版本的作品集",
+      ja: "以前の作品集",
+    },
+    year: 2017,
+    url: "https://archive.marstanjx.com/",
   },
 ];

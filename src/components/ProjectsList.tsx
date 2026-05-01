@@ -16,7 +16,7 @@ function ProjectRow({ project }: { project: Project }) {
         {title}
       </span>
       <span className="text-muted">{description}</span>
-      <span className="text-muted text-[14px]">{project.year}</span>
+      <span className="text-muted text-[14px] font-mono">{project.year}</span>
     </>
   );
 
