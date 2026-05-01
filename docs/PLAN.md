@@ -4,72 +4,151 @@
 
 Ship a minimal, single-page portfolio site at **marstanjx.com** that:
 
-1. Introduces who I am (a few sentences — v1 in `intro.md`).
+1. Introduces who I am (intro lives in `intro.md`, English finalized).
 2. Points visitors to my socials.
-3. Archives my old site so it's still reachable.
+3. Lists ten projects below the socials row, reverse-chronological, with minimal `/project/[slug]` pages for self-hosted video items.
+4. Archives my old site at `/archive/` so it's still reachable.
 
-That's it. No projects, no case studies, no blog yet — those come in later phases.
+Inspiration: Austin Valleskey-style single column, dark background, generous whitespace, tight typographic rhythm. The projects list takes its visual cue from Brian Lovin's projects index — bold short titles, muted descriptions, ↗ glyph for external links.
 
-Inspiration: the Austin Valleskey-style single column, dark background, generous whitespace, tight typographic rhythm.
+**Stack:** Next.js (App Router) + Tailwind on Vercel.
 
-**Stack:** Next.js on Vercel.
+---
 
 ## Reference Docs
 
-- `intro.md` — v1 of the intro copy.
-- `de-jd.md` — the Design Engineer job description Mars authored. Use it as the source of truth for how Mars thinks about the role: "taste in engineering," design systems as infrastructure, AI-native craft, internal tooling. The site's tone, copy, and craft level should embody those values — anything that ships here is also a portfolio for the JD itself.
+- `intro.md` — canonical intro copy in three locales (English final; 中文/日本語 drafts). Implementation agent sources per-locale text from this file.
+- `intro-v2.md` — polish history for the intro.
+- `de-jd.md` — Design Engineer JD Mars authored. Source of truth for tone/values: *taste in engineering*, design systems as infrastructure, AI-native craft, internal tooling. The site itself should embody these values — quality of execution outranks feature count.
+- `projects-schema.md` — schema for projects data, plus open implementation decisions for that section.
+- `20260501-projects.md` — raw data list of projects with URLs, years, and Mars's notes.
 
 ---
 
 ## Visual Layout
 
 ```
-┌─────────────────────────────────────────────┐
-│                                             │
-│                                             │
-│   Mars Tan                                  │
-│   [Role], [Company]                         │
-│                                             │
-│                                             │
-│   [Intro paragraph 1 — TBD by Mars]         │
-│                                             │
-│   [Intro paragraph 2 — TBD by Mars]         │
-│                                             │
-│   [Intro paragraph 3 — TBD by Mars]         │
-│                                             │
-│                                             │
-│   LinkedIn   GitHub   Email   Archive       │
-│                                             │
-│                                             │
-└─────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────┐
+│                                          [☼/☾]  │  ← theme toggle, top-right
+│                                                 │
+│   Mars Tan                                      │
+│   Senior Design Engineer at InstaLILY AI.       │
+│                                                 │
+│   A good product is both crafted and built…     │  ¶1 belief
+│                                                 │
+│   At InstaLILY, I iterate on prototyping…       │  ¶2 work
+│                                                 │
+│   Before this, I studied Arts, Technology…      │  ¶3 origin
+│                                                 │
+│                                                 │
+│   LinkedIn   GitHub   Email   Archive           │  ← socials row
+│                                                 │
+│                                                 │
+│   Projects                                      │  ← section label, muted
+│                                                 │
+│   Maimai            Per-round pricing…    2026  │
+│   Nessie            A launch video for…   2025  │
+│   AI Agents         Animated agentic…     2024  │
+│   Diffusion-GAN     A reproduction…       2023  │
+│   Groupoo           Launch video I…       2022  │
+│   Motion Reel       Years of animation…   2021  │
+│   Mars Website      My old portfolio…     2020  │
+│   AARDVARC          A syllabus tool I…    2019  │
+│   Lucky Ball        [tbd]                 2019  │
+│   Japanese Notes    My JLPT notebook…     2018  │
+│                                                 │
+└─────────────────────────────────────────────────┘
 ```
 
-Single centered column, ~600px max-width. Everything left-aligned within the column. Footer-style row of underlined text links at the bottom.
+Single centered column. Max-width ~600px shared by intro and projects. Everything left-aligned.
+
+**Project rows have three visual regions:**
+
+- **Title** (bold) on the left. No external-link glyph — external vs internal isn't surfaced visually.
+- **Description** (muted) in the middle column.
+- **Year** (muted, right-aligned) on the right.
+
+On narrow screens (≤ ~520px) the year stacks under the description rather than competing for horizontal space.
 
 ---
 
 ## Content Blocks
 
 ### Header
-- **Name:** Mars Tan
-- **Role line:** `Senior Design Engineer at [InstaLILY AI](https://instalily.ai).`
+
+- **Name:** *Mars Tan* (~32–40px, bold)
+- **Role line:** *Senior Design Engineer at InstaLILY AI.* (muted)
+
+In the multi-locale version (post-Phase 1), the role line localizes per `intro.md` per-locale role string. Phase 1 ships English only.
 
 ### Intro
-v1 lives in `intro.md`. Current shape:
 
-- ¶1 — Origin / education (Arts, Tech, and Business of Innovation @ USC Iovine and Young).
-- ¶2 — What I actually do at InstaLILY (AI-native experiences + systems behind them).
-- ¶3 — Languages, with 日本語 linking to my N5 notes.
+Three paragraphs, locked. Source: `intro.md` → `## English`.
 
-Inline links inside body text — treat the `(url)` syntax in `intro.md` as link targets attached to the preceding phrase (e.g. `InstaLILY AI`, `日本語`).
+All copy in this section is multilingual (en/zh/ja); the `LangSwitcher` in the top-right swaps it.
 
 ### Links Row
-Plain underlined text links, separated by spaces:
+
+Plain underlined text links, separated by spaces. Same row pattern as Valleskey. Sits directly under the intro, above the Projects section.
 
 - **LinkedIn** → linkedin.com/in/[handle]
 - **GitHub** → github.com/[handle]
 - **Email** → mailto:mars@instalily.ai
-- **Archive** → marstanjx.com (the old site, hosted somewhere — see "Archive Strategy" below)
+- **Archive** → /archive
+
+Labels (LinkedIn / GitHub / Email / Archive) are localized per `LangContext`.
+
+### Projects (NEW)
+
+Sits at the bottom of the page, **below the socials row**. Section label *"Projects"* in muted body color, smaller than body text. Followed by a list of rows sorted by `year` descending; same-year items keep their data-array order (stable sort).
+
+- **Data source:** `src/data/projects.ts` exporting a typed array. Schema in `projects-schema.md`.
+- **Item count today:** 10, spanning 2018-2026.
+- **Row link target:** `url` (external, opens in new tab) or `/project/[slug]` (internal page).
+- **External marker:** none — external rows are visually identical to internal ones; only `target="_blank"` differs.
+- **Hover:** entire row is the trigger; only the title gets underlined on hover (description and year stay plain).
+- **i18n:** every visible string in this section — section label, project titles, descriptions, and the back link on `/project/[slug]` — is keyed off the current `Lang` from `LangContext`. Year is a number and stays as-is across locales.
+
+---
+
+## /project/[slug] Pages (NEW)
+
+Minimal pages used for self-hosted video items today, and any future internal project pages later. Single-purpose: show the asset, give a way back.
+
+**Layout:**
+
+```
+┌─────────────────────────────────────────────────┐
+│   ← Back                                        │
+│                                                 │
+│   AI Agents                                     │  ← title
+│   2024 · Animated agentic workflow.             │  ← meta, muted
+│                                                 │
+│   ┌─────────────────────────────────────────┐   │
+│   │                                         │   │  ← video player
+│   │              [video]                    │   │
+│   │                                         │   │
+│   └─────────────────────────────────────────┘   │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+- **Back link** at top-left, `← Back`, routes to `/`. Same muted text-link treatment.
+- **Title** — project's `title`, same style as the home-page name (bold, ~32–40px).
+- **Meta line** — `year · description`, muted, small.
+- **Video player** — driven by the `video` field on the project:
+  - **Self-hosted** (AI Agents, Groupoo, Motion Reel): native `<video>` element from `video.src`. Apply `loop autoplay muted playsinline` when `video.loop` is true. Otherwise show `controls`.
+  - **YouTube embed** (none today — Diffusion-GAN goes to YouTube via external `url`, not via internal page; reserved for any future internal-page items): iframe with `?rel=0&modestbranding=1`.
+
+Same column width as home. Same theme tokens.
+
+**Asset prep:**
+
+- Self-hosted videos live in `/public/videos/[slug].mp4`. Optimize before committing — `ffmpeg -c:v libx264 -crf 23 -preset medium -movflags +faststart` is a sane default.
+- For looping items, strip audio entirely (`-an`) — browsers block autoplay-with-sound, and the asset is smaller.
+- AI Agents specifically: 10-second loop, no audio.
+
+**Route convention:** `/project/[slug]` (singular, per Mars's preference). Conventional Next.js style is `/projects/[slug]` (plural, mirroring the section name) — flagged as Open Decision below.
 
 ---
 
@@ -77,21 +156,27 @@ Plain underlined text links, separated by spaces:
 
 Both palettes share the same type ramp, spacing, and link treatment — only color tokens swap.
 
-| Element       | Dark mode                | Light mode               |
-|---------------|--------------------------|--------------------------|
-| Background    | `#0a0a0a`                | `#fafafa`                |
-| Body text     | `#e5e5e5`                | `#171717`                |
-| Muted text    | `#888`                   | `#666`                   |
-| Link underline| `#444`                   | `#bbb`                   |
+| Token         | Dark mode    | Light mode  |
+|---------------|--------------|-------------|
+| Background    | `#0a0a0a`    | `#fafafa`   |
+| Body text     | `#e5e5e5`    | `#171717`   |
+| Muted text    | `#888`       | `#666`      |
+| Link underline| `#444`       | `#bbb`      |
 
-| Element       | Choice                                              |
-|---------------|-----------------------------------------------------|
-| Font          | System sans (or Inter / Geist) — clean, no serif    |
-| Name size     | ~32–40px, bold                                      |
-| Body size     | ~16–18px, line-height 1.6                           |
-| Link style    | Underlined, no color shift on hover (just opacity)  |
-| Spacing       | Generous — ~1.5rem between paragraphs               |
-| Width         | max-width ~600px, centered, padded on mobile        |
+| Element              | Choice                                                       |
+|----------------------|--------------------------------------------------------------|
+| Font                 | System sans (or Inter / Geist) — clean, no serif             |
+| Name / project title | ~32–40px, bold                                               |
+| Body size            | ~16–18px, line-height 1.6                                    |
+| Section label        | ~13–14px, muted, sentence case (*Projects*)                  |
+| Project row title    | Body size, bold                                              |
+| Project description  | Body size, muted                                             |
+| Project year         | Body size, muted, right-aligned                              |
+| Link style           | Project rows: no underline by default; only the title underlines on row hover. Other links stay underlined. |
+| Paragraph spacing    | ~1.5rem between intro paragraphs                             |
+| Project row spacing  | ~0.75rem vertical                                            |
+| Section spacing      | ~3rem between intro and socials row, ~3rem between socials and Projects |
+| Width                | max-width ~600px, centered, padded on mobile                 |
 
 ---
 
@@ -102,23 +187,19 @@ Site supports both modes with a manual toggle.
 **Default:** follow `prefers-color-scheme` on first visit; once the user toggles, persist their choice and use it on subsequent visits.
 
 **Implementation:**
+
 - Use [`next-themes`](https://github.com/pacocoursey/next-themes) — handles system preference, persistence (localStorage), and SSR-safe class swapping with no flash on load.
 - Tailwind config: `darkMode: 'class'` so `dark:` variants key off `<html class="dark">`.
-- Express colors as CSS variables in `globals.css` so the rest of the app references semantic tokens (`bg-background`, `text-foreground`, `text-muted`) instead of raw hex. Variable values flip under `.dark`.
-- Toggle UI: small text button in the top-right corner of the page (e.g. a `☼ / ☾` glyph or "light / dark" text) — keep it quiet so it doesn't compete with the intro.
+- Colors live as CSS variables in `globals.css`. Components reference semantic tokens (`bg-background`, `text-foreground`, `text-muted`) instead of raw hex. Variable values flip under `.dark`.
+- Toggle UI: small text or glyph button in the top-right corner of the page (e.g. `☼ / ☾`). Quiet — should not compete with the intro.
 
-**Why this matters here:** A craft signal. Theme handling done well (no FOUC, respects system, persists, accessible toggle) is exactly the "considered detail" the JD calls out. Done sloppily it's the opposite signal.
+**Why this matters:** A craft signal. Theme handling done well (no FOUC, respects system, persists, accessible toggle) is exactly the "considered detail" the JD calls out. Done sloppily it's the opposite signal.
 
 ---
 
 ## Archive Strategy
 
-Old marstanjx.com content — two options:
-
-1. **Subdomain** — host old site at `archive.marstanjx.com` and link to it.
-2. **Subpath** — drop old site files into `/archive/` on the new site.
-
-Recommendation: **subpath** (`/archive/`) — simpler, no DNS work, single deploy.
+Old marstanjx.com content gets dropped into `public/archive/` and served as static files at `marstanjx.com/archive/`. No DNS work, no separate deploy. The footer link points at `/archive`.
 
 ---
 
@@ -126,26 +207,45 @@ Recommendation: **subpath** (`/archive/`) — simpler, no DNS work, single deplo
 
 - **Framework:** Next.js (App Router)
 - **Styling:** Tailwind CSS
+- **Theme:** `next-themes`
 - **Host:** Vercel
 - **Domain:** marstanjx.com (point apex + www at Vercel)
 
 ---
 
-## File Structure (Phase 1, Next.js App Router + Tailwind)
+## File Structure
 
 ```
 mars-website/
 ├── app/
-│   ├── layout.tsx          # root layout, fonts, metadata
-│   ├── page.tsx            # the single home page
-│   └── globals.css         # Tailwind directives + base styles
-├── docs/                   # planning + content drafts (this folder)
+│   ├── layout.tsx                # root layout, fonts, metadata, theme provider
+│   ├── page.tsx                  # home: header + intro + projects + footer
+│   ├── project/
+│   │   └── [slug]/
+│   │       └── page.tsx          # individual project page (back + meta + video)
+│   └── globals.css               # Tailwind directives + CSS variable tokens
+├── components/
+│   ├── theme-toggle.tsx
+│   ├── projects-list.tsx         # renders the projects section
+│   └── video-player.tsx          # <video> wrapper with loop opt
+├── data/                         # all multilingual content lives here
+│   ├── intro.tsx                 # name, role, paragraphs per locale
+│   ├── projects.ts               # typed array of Project records (schema in projects-schema.md)
+│   └── socials.ts                # localized labels for the socials row
+├── docs/
 │   ├── PLAN.md
 │   ├── intro.md
-│   └── de-jd.md
+│   ├── intro-v2.md
+│   ├── de-jd.md
+│   ├── projects-schema.md
+│   └── 20260501-projects.md
 ├── public/
 │   ├── favicon.svg
-│   └── archive/            # old site, served at /archive
+│   ├── videos/
+│   │   ├── ai-agents.mp4
+│   │   ├── groupoo.mp4
+│   │   └── motion-reel.mp4
+│   └── archive/                  # old site, served at /archive
 │       └── index.html
 ├── tailwind.config.ts
 ├── postcss.config.mjs
@@ -154,21 +254,24 @@ mars-website/
 └── README.md
 ```
 
-Note: dropping the old site into `public/archive/` lets Vercel serve it as static files at `marstanjx.com/archive/` with zero extra config.
-
 ---
 
 ## Phase 1 Checklist
 
-- [x] Confirm tech stack — Next.js + Tailwind on Vercel
-- [x] Confirm role line — Senior Design Engineer at InstaLILY AI
-- [x] Intro v1 drafted (`intro.md`)
-- [ ] Polish intro copy (v2 pass)
+- [x] Tech stack — Next.js + Tailwind on Vercel
+- [x] Role line — Senior Design Engineer at InstaLILY AI
+- [x] Intro v2 final (English, in `intro.md`)
+- [x] Projects schema and data drafted (`projects-schema.md`, `20260501-projects.md`)
+- [x] Project descriptions drafted for 8 of 10 items (Lucky Ball still needs one)
 - [ ] Scaffold Next.js app with Tailwind (`app/page.tsx`, `app/layout.tsx`, `globals.css`)
 - [ ] Set up theme system: `next-themes` + CSS variable tokens + Tailwind `darkMode: 'class'`
-- [ ] Implement single-page layout matching mock
+- [ ] Implement single-page home layout (header + intro + projects + footer)
 - [ ] Build dark/light toggle (no-FOUC, respects system, persists)
-- [ ] Wire up footer links (URLs filled in later)
+- [ ] Implement Projects section: row layout, ↗ for external, year column, reverse-chrono sort
+- [ ] Implement `/project/[slug]` pages: back link, meta, self-hosted video player with loop opt
+- [ ] Optimize and drop video assets into `public/videos/`
+- [ ] Write missing description: Lucky Ball
+- [ ] Wire up footer links (URLs to be supplied)
 - [ ] Drop old site into `public/archive/`
 - [ ] Add favicon + OG image + page metadata
 - [ ] Deploy to Vercel
@@ -176,23 +279,36 @@ Note: dropping the old site into `public/archive/` lets Vercel serve it as stati
 
 ---
 
+## Open Decisions (affect implementation)
+
+Don't block scaffolding, but should be answered before final polish.
+
+- **Show year on project rows, or hide it?** Currently in the layout. Easy to remove if Mars wants the strict reference style.
+- **Route convention** — `/project/[slug]` (Mars's pref) vs `/projects/[slug]` (Next.js convention). Pick one before wiring routes.
+- **Inline-list preview for AI Agents loop?** Currently page-only. Could play a small loop in the row. Adds work for a single qualifying item.
+- **External link icon style** — ↗ glyph (committed). Switchable to lucide-react `ExternalLink` SVG if Mars wants more weight.
+- **Title shortenings to confirm** — *Maimai* vs *Maimai Per Round*; *Diffusion-GAN Paper* (committed); *Motion Reel*, *Nessie*, *Groupoo* (committed).
+
+Tracked in `projects-schema.md`.
+
+---
+
 ## Deferred (revisit later)
 
 - LinkedIn + GitHub URLs — placeholders for now.
 - Old marstanjx.com files — drop into `public/archive/` when available.
-- Inline link styling for `(url)` syntax in `intro.md`.
-- Signature inline detail (Valleskey-style glyph) — explore once base layout is in.
+- Signature inline detail (Valleskey-style glyph in the bio) — explore once base layout is in.
 - Footer/nav link order and hover behavior.
 
 ---
 
 ## Out of Scope for Phase 1
 
-- Projects / case studies
-- Blog or writing
-- Animations
-- Analytics
-- Custom typography (web fonts)
-- Multilingual intro + language switcher (Mars will write the intro in multiple languages and add a switcher; intro layout in Phase 1 should leave room for the switcher to be added without rework)
+- Long-form case studies (minimal `/project/[slug]` video pages are *in*; full write-ups are not).
+- Blog or writing.
+- Page-level animations / transitions.
+- Analytics.
+- Custom typography (web fonts).
+- Multilingual intro + language switcher. Intro layout in Phase 1 should leave room for a switcher to be added later (likely top-right corner, possibly paired with the theme toggle).
 
 These all live in later phases.

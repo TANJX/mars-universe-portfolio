@@ -1,38 +1,11 @@
 "use client";
 
-import { useLang, type Lang } from "./LangContext";
-
-type Labels = {
-  linkedin: string;
-  github: string;
-  email: string;
-  archive: string;
-};
-
-const LABELS: Record<Lang, Labels> = {
-  en: {
-    linkedin: "LinkedIn",
-    github: "GitHub",
-    email: "Email",
-    archive: "Archive",
-  },
-  zh: {
-    linkedin: "领英",
-    github: "GitHub",
-    email: "邮箱",
-    archive: "旧版网站",
-  },
-  ja: {
-    linkedin: "LinkedIn",
-    github: "GitHub",
-    email: "メール",
-    archive: "アーカイブ",
-  },
-};
+import { useLang } from "./LangContext";
+import { SOCIAL_LABELS } from "@/data/socials";
 
 export function Socials() {
   const { lang } = useLang();
-  const labels = LABELS[lang];
+  const labels = SOCIAL_LABELS[lang];
 
   return (
     <nav className="mt-16 flex flex-wrap gap-x-6 gap-y-2 text-muted">
