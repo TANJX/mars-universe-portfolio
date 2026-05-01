@@ -2,6 +2,7 @@ import { Intro } from "@/components/Intro";
 import { LangProvider } from "@/components/LangContext";
 import { LangSwitcher } from "@/components/LangSwitcher";
 import { MarsLogo } from "@/components/MarsLogo";
+import { Socials } from "@/components/Socials";
 
 export default function Home() {
   return (
@@ -15,26 +16,7 @@ export default function Home() {
 
         <Intro />
 
-        <nav className="mt-16 flex flex-wrap gap-x-6 gap-y-2 text-muted">
-          <a
-            href="https://www.linkedin.com/in/marstanjx"
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/TANJX"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-          <a href="mailto:marstanjx@gmail.com">Email</a>
-          <a href="https://archive.marstanjx.com" target="_blank" rel="noreferrer">
-            Archive
-          </a>
-        </nav>
+        <Socials />
       </main>
     </LangProvider>
   );
