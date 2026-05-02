@@ -30,6 +30,16 @@ export const BACK_LABEL: Localized = {
 
 export const PROJECTS: Project[] = [
   {
+    title: { en: "Mars Universe Bank", zh: "Mars Universe Bank", ja: "Mars Universe Bank" },
+    description: {
+      en: "A personal-finance OS.",
+      zh: "我的个人财务系统",
+      ja: "個人財務 OS",
+    },
+    year: 2026,
+    url: "https://beancount.demo.marstanjx.com/",
+  },
+  {
     title: { en: "Maimai Per Round", zh: "NYNJ 舞萌地图", ja: "Maimai" },
     description: {
       en: "Arcade pricing across NYC and NJ.",

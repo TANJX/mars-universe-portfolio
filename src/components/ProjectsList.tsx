@@ -34,10 +34,12 @@ function ProjectRow({ project }: { project: Project }) {
         >
           {rowContent}
         </a>
-      ) : (
+      ) : project.slug ? (
         <Link href={`/project/${project.slug}`} className={rowClass}>
           {rowContent}
         </Link>
+      ) : (
+        <div className={rowClass}>{rowContent}</div>
       )}
     </li>
   );
@@ -52,7 +54,7 @@ export function ProjectsList() {
       <h2 className="mb-4 text-[13px] text-muted">{SECTION_LABEL[lang]}</h2>
       <ul className="flex flex-col gap-y-3">
         {sorted.map((p) => (
-          <ProjectRow key={p.slug ?? p.url} project={p} />
+          <ProjectRow key={p.slug ?? p.url ?? `${p.title.en}-${p.year}`} project={p} />
         ))}
       </ul>
     </section>
