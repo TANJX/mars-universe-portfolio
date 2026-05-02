@@ -2,7 +2,7 @@
 
 A working doc for the Projects section that goes under the bio. Reference style: minimal list (à la Brian Lovin) — bold short title, muted description, optional ↗ arrow for external links.
 
-The raw data list lives in `20260501-projects.md`. This doc defines the schema we'll structure that data into; the implementation agent will source per-project fields from a typed file (`src/data/projects.ts`).
+The raw data list lives in `../notes/projects.md`. This doc defines the schema we'll structure that data into; the implementation agent will source per-project fields from a typed file (`src/data/projects.ts`).
 
 ---
 

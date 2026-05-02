@@ -4,7 +4,7 @@
 
 Ship a minimal, single-page portfolio site at **marstanjx.com** that:
 
-1. Introduces who I am (intro lives in `intro.md`, English finalized).
+1. Introduces who I am (intro lives in `../notes/intro.md`, English finalized).
 2. Points visitors to my socials.
 3. Lists ten projects below the socials row, reverse-chronological, with minimal `/project/[slug]` pages for self-hosted video items.
 4. Archives my old site at `/archive/` so it's still reachable.
@@ -17,11 +17,11 @@ Inspiration: Austin Valleskey-style single column, dark background, generous whi
 
 ## Reference Docs
 
-- `intro.md` — canonical intro copy in three locales (English final; 中文/日本語 drafts). Implementation agent sources per-locale text from this file.
-- `intro-v2.md` — polish history for the intro.
-- `de-jd.md` — Design Engineer JD Mars authored. Source of truth for tone/values: *taste in engineering*, design systems as infrastructure, AI-native craft, internal tooling. The site itself should embody these values — quality of execution outranks feature count.
+- `../notes/intro.md` — canonical intro copy in three locales (English final; 中文/日本語 drafts). Implementation agent sources per-locale text from this file.
+- `../notes/intro-v2.md` — polish history for the intro.
+- `../notes/de-jd.md` — Design Engineer JD Mars authored. Source of truth for tone/values: *taste in engineering*, design systems as infrastructure, AI-native craft, internal tooling. The site itself should embody these values — quality of execution outranks feature count.
 - `projects-schema.md` — schema for projects data, plus open implementation decisions for that section.
-- `20260501-projects.md` — raw data list of projects with URLs, years, and Mars's notes.
+- `../notes/projects.md` — raw data list of projects with URLs, years, and Mars's notes.
 
 ---
 
@@ -79,11 +79,11 @@ On narrow screens (≤ ~520px) the year stacks under the description rather than
 - **Name:** *Mars Tan* (~32–40px, bold)
 - **Role line:** *Senior Design Engineer at InstaLILY AI.* (muted)
 
-In the multi-locale version (post-Phase 1), the role line localizes per `intro.md` per-locale role string. Phase 1 ships English only.
+In the multi-locale version (post-Phase 1), the role line localizes per `../notes/intro.md` per-locale role string. Phase 1 ships English only.
 
 ### Intro
 
-Three paragraphs, locked. Source: `intro.md` → `## English`.
+Three paragraphs, locked. Source: `../notes/intro.md` → `## English`.
 
 All copy in this section is multilingual (en/zh/ja); the `LangSwitcher` in the top-right swaps it.
 
@@ -230,15 +230,19 @@ mars-website/
 │   └── video-player.tsx          # <video> wrapper with loop opt
 ├── data/                         # all multilingual content lives here
 │   ├── intro.tsx                 # name, role, paragraphs per locale
-│   ├── projects.ts               # typed array of Project records (schema in projects-schema.md)
+│   ├── projects.ts               # typed array of Project records (schema in docs/plan/projects-schema.md)
 │   └── socials.ts                # localized labels for the socials row
 ├── docs/
-│   ├── PLAN.md
-│   ├── intro.md
-│   ├── intro-v2.md
-│   ├── de-jd.md
-│   ├── projects-schema.md
-│   └── 20260501-projects.md
+│   ├── plan/
+│   │   ├── 20260430-archive-migration-prompt.md
+│   │   ├── 20260501-portfolio-phase-1.md
+│   │   ├── 20260501-projects-schema.md
+│   │   └── 20260502-repo-archive-review.md
+│   └── notes/
+│       ├── intro.md
+│       ├── intro-v2.md
+│       ├── de-jd.md
+│       └── projects.md
 ├── public/
 │   ├── favicon.svg
 │   ├── videos/
@@ -260,8 +264,8 @@ mars-website/
 
 - [x] Tech stack — Next.js + Tailwind on Vercel
 - [x] Role line — Senior Design Engineer at InstaLILY AI
-- [x] Intro v2 final (English, in `intro.md`)
-- [x] Projects schema and data drafted (`projects-schema.md`, `20260501-projects.md`)
+- [x] Intro v2 final (English, in `../notes/intro.md`)
+- [x] Projects schema and data drafted (`projects-schema.md`, `../notes/projects.md`)
 - [x] Project descriptions drafted for 8 of 10 items (Lucky Ball still needs one)
 - [ ] Scaffold Next.js app with Tailwind (`app/page.tsx`, `app/layout.tsx`, `globals.css`)
 - [ ] Set up theme system: `next-themes` + CSS variable tokens + Tailwind `darkMode: 'class'`
